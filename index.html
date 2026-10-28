@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Шоппабл-карточка товара</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: одна колонка ~760 px, сверху схемы карточки, ниже требования таблицей и списками */
+:root{
+  --bg:#f4f4f6; --surface:#ffffff; --fg:#1d1d22; --muted:#6b6b76; --line:#e2e2e8;
+  --accent:#e0262f; --sale:#ff335f; --star:#ffb400;
+  --chip:#ececf1; --ok:#1f8f4e; --ok-bg:#e3f4ea; --warn:#9a6a00; --warn-bg:#fff2cc;
+  --card-dark:rgba(28,28,32,.88); --on-dark:#ffffff; --on-dark-muted:rgba(255,255,255,.6);
+  --creative:linear-gradient(160deg,#f6a6c4 0%,#c86b96 55%,#6e3553 100%);
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#141417; --surface:#1e1e23; --fg:#ececf1; --muted:#9a9aa6; --line:#2e2e35;
+  --accent:#ff5a60; --sale:#ff6b8a; --chip:#2c2c33;
+  --ok:#5fd08e; --ok-bg:#163525; --warn:#f0c14b; --warn-bg:#3a3014; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#141417; --surface:#1e1e23; --fg:#ececf1; --muted:#9a9aa6; --line:#2e2e35;
+  --accent:#ff5a60; --sale:#ff6b8a; --chip:#2c2c33;
+  --ok:#5fd08e; --ok-bg:#163525; --warn:#f0c14b; --warn-bg:#3a3014; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);font-size:16px;line-height:24px}
+.wrap{max-width:760px;margin:0 auto;padding-block:40px 64px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:48px}
+h1{font-size:32px;line-height:40px;font-weight:700;margin:0;text-wrap:balance}
+h2{font-size:22px;line-height:30px;font-weight:700;margin:0;text-wrap:balance}
+h3{font-size:16px;line-height:24px;font-weight:600;margin:0}
+p{margin:0;text-wrap:pretty}
+.lead{color:var(--muted);font-size:18px;line-height:26px;max-width:62ch}
+section{display:flex;flex-direction:column;gap:16px}
+.sub{color:var(--muted)}
+ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+li{text-wrap:pretty}
+
+/* таблица полей */
+.tbl{overflow-x:auto;background:var(--surface);border-radius:16px;border:1px solid var(--line)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px;line-height:22px}
+th,td{text-align:left;vertical-align:top;padding:12px 14px;border-bottom:1px solid var(--line)}
+th{font-size:13px;line-height:18px;color:var(--muted);font-weight:500}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600;white-space:nowrap}
+.pill{display:inline-block;font-size:13px;line-height:18px;padding:2px 8px;border-radius:999px;white-space:nowrap;font-weight:500}
+.must{background:var(--ok-bg);color:var(--ok)}
+.cond{background:var(--chip);color:var(--fg)}
+.opt{background:var(--warn-bg);color:var(--warn)}
+.num{font-variant-numeric:tabular-nums}
+
+/* схемы */
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
+.spec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.spec .cap{font-size:14px;line-height:20px;color:var(--muted)}
+.stage{background:var(--creative);border-radius:12px;padding:40px 8px 8px;display:flex;gap:8px;overflow:hidden}
+.stage.end{justify-content:flex-end}
+.mini{flex:none;width:calc(100% - 28px);background:var(--card-dark);color:var(--on-dark);border-radius:20px;padding:8px;
+  display:flex;align-items:center;gap:8px;min-height:64px;box-sizing:border-box;font-size:12px;line-height:16px}
+.mini.solo{width:100%}
+.ph{flex:none;width:48px;height:48px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.ph i{width:16px;height:32px;border-radius:4px;background:#f48fb1;display:block}
+.ph.b i{background:#7a5c9e;width:28px;height:28px;border-radius:50%}
+.ph.c i{background:#e8c39e;width:10px;height:34px}
+.txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:32px}
+.row{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.price{font-size:14px;line-height:18px;font-weight:500}
+.badge{background:var(--sale);color:#fff;border-radius:6px;padding:0 4px;font-size:11px;line-height:15px;font-weight:600}
+.old{color:var(--on-dark-muted);text-decoration:line-through;font-size:11px}
+.rate{font-size:11px}.rate b{color:var(--star);font-weight:400}
+.cart{flex:none;width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.cart svg{width:22px;height:22px}
+.step{flex:none;display:flex;align-items:center;gap:4px;background:#fff;color:#1d1d22;border-radius:12px;padding:4px}
+.step span{width:28px;height:32px;display:grid;place-items:center;font-size:18px;border-radius:8px;background:#f0f0f3}
+.step em{font-style:normal;text-align:center;font-size:12px;line-height:14px;min-width:28px}
+.stack{display:flex;gap:4px;flex:none}
+.plus{flex:none;width:48px;height:48px;border-radius:12px;background:#fff;color:#1d1d22;font-weight:600;font-size:14px;display:grid;place-items:center}
+.all{flex:none;display:flex;align-items:center;gap:4px;padding-right:4px;color:var(--on-dark)}
+.all span{font-size:18px}
+.tile{flex:none;width:56px;background:var(--card-dark);color:var(--on-dark);border-radius:20px;display:grid;place-items:center;font-size:12px;text-align:center;line-height:16px}
+
+.note{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+.foot{color:var(--muted);font-size:14px;line-height:20px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header style="display:flex;flex-direction:column;gap:12px">
+  <h1>Шоппабл-карточка товара</h1>
+  <p class="lead">Что должна уметь карточка товара в&nbsp;рекламных форматах и&nbsp;какие поля в&nbsp;ней обязательны.</p>
+</header>
+
+<section>
+  <h2>Где живёт карточка</h2>
+  <ul>
+    <li><b>Главный баннер</b> (hero).</li>
+    <li><b>Баннер в&nbsp;листинге</b>: один товар внутри баннера.</li>
+    <li><b>Сторис</b>: кнопка «Показать товары». По&nbsp;нажатию открывается шторка со&nbsp;всеми товарами из&nbsp;подборки. Там обычная вертикальная карточка каталога.</li>
+  </ul>
+  <p>Два вида карточки:</p>
+  <ul>
+    <li><b>Мини-карточка</b>: один товар поверх креатива.</li>
+    <li><b>Карточка-подборка</b>: ведёт сразу на&nbsp;несколько товаров.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Как выглядит</h2>
+  <div class="board">
+
+    <div class="spec">
+      <h3>Полная мини-карточка</h3>
+      <div class="stage"><div class="mini">
+        <div class="ph"><i></i></div>
+        <div class="txt">
+          <div class="name">Солнцезащитный стик для&nbsp;лица SPF&nbsp;50</div>
+          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="badge num">−19%</span><span class="old num">1&nbsp;590&nbsp;₽</span><span class="rate"><b>★</b> 4,7</span></div>
+        </div>
+        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="#1d1d22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
+      </div><div class="mini"><div class="ph b"><i></i></div></div></div>
+      <p class="cap">Фото, название в&nbsp;2&nbsp;строки, цена, бейдж скидки, старая цена, рейтинг, корзина.</p>
+    </div>
+
+    <div class="spec">
+      <h3>Товар в&nbsp;корзине</h3>
+      <div class="stage"><div class="mini">
+        <div class="ph"><i></i></div>
+        <div class="txt">
+          <div class="name">Солнцезащитный стик для&nbsp;лица SPF&nbsp;50</div>
+          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span></div>
+        </div>
+        <div class="step"><span>−</span><em class="num">1<br>шт</em><span>+</span></div>
+      </div><div class="mini"><div class="ph b"><i></i></div></div></div>
+      <p class="cap">Корзина превращается в&nbsp;счётчик.</p>
+    </div>
+
+    <div class="spec">
+      <h3>Мало места или&nbsp;рейтинг выключен</h3>
+      <div class="stage"><div class="mini">
+        <div class="ph b"><i></i></div>
+        <div class="txt">
+          <div class="name">Виноград чёрный без&nbsp;косточек, 500&nbsp;г</div>
+          <div class="row"><span class="price num">83,93&nbsp;₽</span><span class="old num">97,99&nbsp;₽</span></div>
+        </div>
+        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="#1d1d22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
+      </div><div class="mini"><div class="ph c"><i></i></div></div></div>
+      <p class="cap">Сначала уходит рейтинг, потом бейдж. Старая цена остаётся: скидку видно всегда.</p>
+    </div>
+
+    <div class="spec">
+      <h3>Карточка-подборка</h3>
+      <div class="stage"><div class="mini solo">
+        <div class="stack"><div class="ph"><i></i></div><div class="ph b"><i></i></div><div class="ph c"><i></i></div><div class="plus num">+5</div></div>
+        <div class="txt"></div>
+        <div class="all">Все <span>›</span></div>
+      </div></div>
+      <p class="cap">До&nbsp;3&nbsp;фото, плитка «+N» того&nbsp;же размера, «Все» и&nbsp;стрелка.</p>
+    </div>
+
+    <div class="spec">
+      <h3>Конец карусели</h3>
+      <div class="stage end"><div class="mini">
+        <div class="ph c"><i></i></div>
+        <div class="txt">
+          <div class="name">Консилер для&nbsp;лица LAF, тон&nbsp;02</div>
+          <div class="row"><span class="price num">292&nbsp;₽</span><span class="badge num">−25%</span><span class="old num">389&nbsp;₽</span><span class="rate"><b>★</b> 4,9</span></div>
+        </div>
+        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="#1d1d22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
+      </div><div class="tile">›<br>Все</div></div>
+      <p class="cap">После последнего товара плитка «Все». Ведёт туда&nbsp;же, куда карточка-подборка.</p>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Поля</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>Поле</th><th>Нужно</th><th>Правило</th></tr></thead>
+    <tbody>
+      <tr><td>Фото товара</td><td><span class="pill must">Обязательно</span></td><td>Из&nbsp;карточки каталога, на&nbsp;белой подложке.</td></tr>
+      <tr><td>Название</td><td><span class="pill must">Обязательно</span></td><td>До&nbsp;2&nbsp;строк, дальше многоточие. Так хватает места объяснить, что&nbsp;за&nbsp;товар. Высота под&nbsp;название всегда фиксированная: 2&nbsp;строки.</td></tr>
+      <tr><td>Цена</td><td><span class="pill must">Обязательно</span></td><td>Актуальная цена для&nbsp;адреса и&nbsp;магазина пользователя.</td></tr>
+      <tr><td>Старая цена</td><td><span class="pill cond">Если есть скидка</span></td><td>Зачёркнутая, рядом с&nbsp;ценой. При&nbsp;скидке обязательна: по&nbsp;сравнению видно выгоду.</td></tr>
+      <tr><td>Бейдж скидки</td><td><span class="pill cond">Если есть скидка</span></td><td>«−19%». Считывается быстрее всего, но&nbsp;им&nbsp;можно пожертвовать, если не&nbsp;хватает места.</td></tr>
+      <tr><td>Вес</td><td><span class="pill cond">Для&nbsp;весовых товаров</span></td><td>Должен быть. Предложение: писать прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г». Или&nbsp;отдельной строкой за&nbsp;счёт одной строки названия.</td></tr>
+      <tr><td>Рейтинг</td><td><span class="pill opt">По&nbsp;настройке</span></td><td>Звезда и&nbsp;оценка. Включается и&nbsp;выключается для&nbsp;конкретного размещения: низкий рейтинг играет против бренда. Самый низкий приоритет.</td></tr>
+      <tr><td>Корзина</td><td><span class="pill must">Обязательно</span></td><td>Иконка корзины, после нажатия счётчик количества.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="note">
+    <h3>Что убирать, когда не&nbsp;хватает места</h3>
+    <ol class="prio">
+      <li>Рейтинг.</li>
+      <li>Бейдж скидки. Скидку тогда показывает старая цена.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>Что умеет карточка</h2>
+  <ul>
+    <li><b>Тап по&nbsp;карточке</b> открывает страницу товара.</li>
+    <li><b>Тап по&nbsp;корзине</b> кладёт 1&nbsp;шт и&nbsp;меняет кнопку на&nbsp;счётчик «− 1&nbsp;шт +».</li>
+    <li><b>«+» и&nbsp;«−»</b> меняют количество в&nbsp;корзине. «−» на&nbsp;1&nbsp;шт убирает товар из&nbsp;корзины и&nbsp;возвращает иконку корзины.</li>
+    <li><b>Связь с&nbsp;корзиной.</b> Если товар уже лежит в&nbsp;корзине, карточка сразу показывает счётчик с&nbsp;этим количеством. Так видно, что&nbsp;товар уже добавлен.</li>
+    <li><b>Данные из&nbsp;каталога.</b> Вся информация о&nbsp;товаре подтягивается из&nbsp;каталога, рекламодатель её&nbsp;не&nbsp;правит.</li>
+    <li><b>Весовые товары.</b> Карточка умеет их&nbsp;показывать, вес в&nbsp;карточке указываем. Предложение, как&nbsp;выводить вес: писать его прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г», и&nbsp;не&nbsp;тратить на&nbsp;него отдельную строку. Или&nbsp;жертвовать одной строкой названия.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Карточка-подборка</h2>
+  <p>Отдельный вариант, когда в&nbsp;рекламе много товаров. Ведёт не&nbsp;на&nbsp;один товар, а&nbsp;на&nbsp;всю подборку.</p>
+  <ul>
+    <li>Состав: до&nbsp;3&nbsp;фото товаров, плитка «+N» для&nbsp;остальных (того&nbsp;же размера, что&nbsp;и&nbsp;фото), текст «Все» и&nbsp;стрелка. Число в&nbsp;«+N» считается автоматически.</li>
+    <li>Тап по&nbsp;всей карточке:
+      <ul>
+        <li>открывает шторку со&nbsp;всеми товарами подборки;</li>
+        <li>открывает страницу раздела с&nbsp;подборкой.</li>
+      </ul>
+    </li>
+    <li>Стрелка на&nbsp;карточке показывает, что&nbsp;по&nbsp;тапу откроются остальные товары.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Настройки в&nbsp;админке</h2>
+  <p>Задаются для&nbsp;каждого размещения:</p>
+  <ul>
+    <li>Режим: один товар, карусель товаров или&nbsp;карточка-подборка.</li>
+    <li>Рейтинг: показывать или&nbsp;нет.</li>
+    <li>Куда ведёт подборка: шторка или&nbsp;раздел.</li>
+  </ul>
+</section>
+
+<p class="foot">Макеты: Figma «[2.0] Плейсменты», секция с&nbsp;синка.</p>
+
+</div>
+</body>
+</html>
