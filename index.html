@@ -58,10 +58,8 @@ td:first-child{font-weight:600;white-space:nowrap}
 .spec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
 .spec .cap{font-size:14px;line-height:20px;color:var(--muted)}
 .stage{background:var(--creative);border-radius:12px;padding:40px 8px 8px;display:flex;gap:8px;overflow:hidden}
-.stage.end{justify-content:flex-end}
-.mini{flex:none;width:calc(100% - 28px);background:var(--card-dark);color:var(--on-dark);border-radius:20px;padding:8px;
+.mini{flex:none;width:100%;max-height:64px;background:var(--card-dark);color:var(--on-dark);border-radius:20px;padding:8px;
   display:flex;align-items:center;gap:8px;min-height:64px;box-sizing:border-box;font-size:12px;line-height:16px}
-.mini.solo{width:100%}
 .ph{flex:none;width:48px;height:48px;border-radius:12px;background:#fff;display:grid;place-items:center}
 .ph i{width:16px;height:32px;border-radius:4px;background:#f48fb1;display:block}
 .ph.b i{background:#7a5c9e;width:28px;height:28px;border-radius:50%}
@@ -84,11 +82,12 @@ td:first-child{font-weight:600;white-space:nowrap}
 .plus{flex:none;width:48px;height:48px;border-radius:12px;background:#fff;color:#1d1d22;font-weight:600;font-size:14px;display:grid;place-items:center}
 .all{flex:none;display:flex;align-items:center;gap:4px;padding-right:4px;color:var(--on-dark)}
 .all span{font-size:18px}
-.tile{flex:none;width:56px;background:var(--card-dark);color:var(--on-dark);border-radius:20px;display:grid;place-items:center;font-size:12px;text-align:center;line-height:16px}
 
 .note{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
 ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
 .foot{color:var(--muted);font-size:14px;line-height:20px}
+.limit{background:var(--surface);border:2px solid var(--accent);border-radius:16px;padding:16px 18px;display:flex;flex-direction:column;gap:4px}
+a{color:var(--accent)}
 </style>
 </head>
 <body>
@@ -112,6 +111,15 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
     <li><b>Мини-карточка</b>: один товар поверх креатива.</li>
     <li><b>Карточка-подборка</b>: ведёт сразу на&nbsp;несколько товаров.</li>
   </ul>
+  <p>Карусели товаров нет: в&nbsp;рекламе либо один товар, либо карточка-подборка.</p>
+  <p><a href="https://www.figma.com/design/g5lzaItWB4XSqI1vN7cwzf/-2.0--%D0%9F%D0%BB%D0%B5%D0%B9%D1%81%D0%BC%D0%B5%D0%BD%D1%82%D1%8B?node-id=15853-88385">Рекламные места в&nbsp;Figma</a>: можно вставить карточку и&nbsp;проверить, как она встаёт.</p>
+</section>
+
+<section>
+  <div class="limit">
+    <h2>Высота: не&nbsp;больше 64&nbsp;px</h2>
+    <p>Меньше можно, больше нельзя. Это касается обоих видов карточки.</p>
+  </div>
 </section>
 
 <section>
@@ -127,7 +135,7 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
           <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="badge num">−19%</span><span class="old num">1&nbsp;590&nbsp;₽</span><span class="rate"><b>★</b> 4,7</span></div>
         </div>
         <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="#1d1d22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
-      </div><div class="mini"><div class="ph b"><i></i></div></div></div>
+      </div></div>
       <p class="cap">Фото, название в&nbsp;2&nbsp;строки, цена, бейдж скидки, старая цена, рейтинг, корзина.</p>
     </div>
 
@@ -140,7 +148,7 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
           <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="badge num">−19%</span></div>
         </div>
         <div class="step"><span>−</span><em class="num">1<small>шт</small></em><span>+</span></div>
-      </div><div class="mini"><div class="ph b"><i></i></div></div></div>
+      </div></div>
       <p class="cap">Корзина превращается в&nbsp;счётчик. Старую цену и&nbsp;рейтинг при&nbsp;этом можно убрать.</p>
     </div>
 
@@ -153,7 +161,7 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
           <div class="row"><span class="price num">500&nbsp;₽</span></div>
         </div>
         <div class="step"><span>−</span><em class="num">500<small>г</small></em><span>+</span></div>
-      </div><div class="mini"><div class="ph b"><i></i></div></div></div>
+      </div></div>
       <p class="cap">В&nbsp;счётчике вес цифрами, под&nbsp;ним серым единица.</p>
     </div>
 
@@ -166,31 +174,18 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
           <div class="row"><span class="price num">83,93&nbsp;₽</span><span class="old num">97,99&nbsp;₽</span></div>
         </div>
         <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="#1d1d22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
-      </div><div class="mini"><div class="ph c"><i></i></div></div></div>
+      </div></div>
       <p class="cap">Сначала уходит рейтинг, потом бейдж. Старая цена остаётся: скидку видно всегда.</p>
     </div>
 
     <div class="spec">
       <h3>Карточка-подборка</h3>
-      <div class="stage"><div class="mini solo">
+      <div class="stage"><div class="mini">
         <div class="stack"><div class="ph"><i></i></div><div class="ph b"><i></i></div><div class="ph c"><i></i></div><div class="plus num">+5</div></div>
         <div class="txt"></div>
         <div class="all">Все <span>›</span></div>
       </div></div>
       <p class="cap">До&nbsp;3&nbsp;фото, плитка «+N» того&nbsp;же размера, «Все» и&nbsp;стрелка.</p>
-    </div>
-
-    <div class="spec">
-      <h3>Конец карусели</h3>
-      <div class="stage end"><div class="mini">
-        <div class="ph c"><i></i></div>
-        <div class="txt">
-          <div class="name">Консилер для&nbsp;лица LAF, тон&nbsp;02</div>
-          <div class="row"><span class="price num">292&nbsp;₽</span><span class="badge num">−25%</span><span class="old num">389&nbsp;₽</span><span class="rate"><b>★</b> 4,9</span></div>
-        </div>
-        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="#1d1d22" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
-      </div><div class="tile">›<br>Все</div></div>
-      <p class="cap">После последнего товара плитка «Все». Ведёт туда&nbsp;же, куда карточка-подборка.</p>
     </div>
 
   </div>
@@ -252,13 +247,13 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
   <h2>Настройки в&nbsp;админке</h2>
   <p>Задаются для&nbsp;каждого размещения:</p>
   <ul>
-    <li>Режим: один товар, карусель товаров или&nbsp;карточка-подборка.</li>
+    <li>Режим: один товар или&nbsp;карточка-подборка.</li>
     <li>Рейтинг: показывать или&nbsp;нет.</li>
     <li>Куда ведёт подборка: шторка или&nbsp;раздел.</li>
   </ul>
 </section>
 
-<p class="foot">Макеты: Figma «[2.0] Плейсменты», секция с&nbsp;синка.</p>
+<p class="foot">Макеты: Figma «[2.0] Плейсменты».</p>
 
 </div>
 </body>
