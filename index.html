@@ -66,6 +66,7 @@ td:first-child{font-weight:600;white-space:nowrap}
 .ph i{width:16px;height:32px;border-radius:4px;background:#f48fb1;display:block}
 .ph.b i{background:#7a5c9e;width:28px;height:28px;border-radius:50%}
 .ph.c i{background:#e8c39e;width:10px;height:34px}
+.ph.d i{background:#f08a6c;width:30px;height:20px;border-radius:10px}
 .txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .name{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:32px}
 .row{display:flex;align-items:center;gap:6px;white-space:nowrap}
@@ -78,6 +79,7 @@ td:first-child{font-weight:600;white-space:nowrap}
 .step{flex:none;display:flex;align-items:center;gap:4px;background:#fff;color:#1d1d22;border-radius:12px;padding:4px}
 .step span{width:28px;height:32px;display:grid;place-items:center;font-size:18px;border-radius:8px;background:#f0f0f3}
 .step em{font-style:normal;text-align:center;font-size:12px;line-height:14px;min-width:28px}
+.step em small{display:block;font-size:11px;color:#8a8a94}
 .stack{display:flex;gap:4px;flex:none}
 .plus{flex:none;width:48px;height:48px;border-radius:12px;background:#fff;color:#1d1d22;font-weight:600;font-size:14px;display:grid;place-items:center}
 .all{flex:none;display:flex;align-items:center;gap:4px;padding-right:4px;color:var(--on-dark)}
@@ -103,7 +105,7 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
   <ul>
     <li><b>Главный баннер</b> (hero).</li>
     <li><b>Баннер в&nbsp;листинге</b>: один товар внутри баннера.</li>
-    <li><b>Сторис</b>: кнопка «Показать товары». По&nbsp;нажатию открывается шторка со&nbsp;всеми товарами из&nbsp;подборки. Там обычная вертикальная карточка каталога.</li>
+    <li><b>Сторис</b>: кнопка «Показать товары». По&nbsp;нажатию открывается шторка со&nbsp;всеми товарами из&nbsp;подборки. Там обычная вертикальная карточка каталога: лейблы оставляем, слайдер на&nbsp;фото убираем.</li>
   </ul>
   <p>Два вида карточки:</p>
   <ul>
@@ -135,11 +137,24 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
         <div class="ph"><i></i></div>
         <div class="txt">
           <div class="name">Солнцезащитный стик для&nbsp;лица SPF&nbsp;50</div>
-          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span></div>
+          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="badge num">−19%</span></div>
         </div>
-        <div class="step"><span>−</span><em class="num">1<br>шт</em><span>+</span></div>
+        <div class="step"><span>−</span><em class="num">1<small>шт</small></em><span>+</span></div>
       </div><div class="mini"><div class="ph b"><i></i></div></div></div>
-      <p class="cap">Корзина превращается в&nbsp;счётчик.</p>
+      <p class="cap">Корзина превращается в&nbsp;счётчик. Старую цену и&nbsp;рейтинг при&nbsp;этом можно убрать.</p>
+    </div>
+
+    <div class="spec">
+      <h3>Весовой товар в&nbsp;корзине</h3>
+      <div class="stage"><div class="mini">
+        <div class="ph d"><i></i></div>
+        <div class="txt">
+          <div class="name">Креветки королевские Магнит, 500&nbsp;г</div>
+          <div class="row"><span class="price num">500&nbsp;₽</span></div>
+        </div>
+        <div class="step"><span>−</span><em class="num">500<small>г</small></em><span>+</span></div>
+      </div><div class="mini"><div class="ph b"><i></i></div></div></div>
+      <p class="cap">В&nbsp;счётчике вес цифрами, под&nbsp;ним серым единица.</p>
     </div>
 
     <div class="spec">
@@ -189,10 +204,10 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
       <tr><td>Фото товара</td><td><span class="pill must">Обязательно</span></td><td>Из&nbsp;карточки каталога, на&nbsp;белой подложке.</td></tr>
       <tr><td>Название</td><td><span class="pill must">Обязательно</span></td><td>До&nbsp;2&nbsp;строк, дальше многоточие. Так хватает места объяснить, что&nbsp;за&nbsp;товар. Высота под&nbsp;название всегда фиксированная: 2&nbsp;строки.</td></tr>
       <tr><td>Цена</td><td><span class="pill must">Обязательно</span></td><td>Актуальная цена для&nbsp;адреса и&nbsp;магазина пользователя.</td></tr>
-      <tr><td>Старая цена</td><td><span class="pill cond">Если есть скидка</span></td><td>Зачёркнутая, рядом с&nbsp;ценой. При&nbsp;скидке обязательна: по&nbsp;сравнению видно выгоду.</td></tr>
+      <tr><td>Старая цена</td><td><span class="pill cond">Если есть скидка</span></td><td>Зачёркнутая, рядом с&nbsp;ценой. При&nbsp;скидке обязательна: по&nbsp;сравнению видно выгоду. Когда товар в&nbsp;корзине и&nbsp;открыт счётчик, можно убрать.</td></tr>
       <tr><td>Бейдж скидки</td><td><span class="pill cond">Если есть скидка</span></td><td>«−19%». Считывается быстрее всего, но&nbsp;им&nbsp;можно пожертвовать, если не&nbsp;хватает места.</td></tr>
       <tr><td>Вес</td><td><span class="pill cond">Для&nbsp;весовых товаров</span></td><td>Должен быть. Предложение: писать прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г». Или&nbsp;отдельной строкой за&nbsp;счёт одной строки названия.</td></tr>
-      <tr><td>Рейтинг</td><td><span class="pill opt">По&nbsp;настройке</span></td><td>Звезда и&nbsp;оценка. Включается и&nbsp;выключается для&nbsp;конкретного размещения: низкий рейтинг играет против бренда. Самый низкий приоритет.</td></tr>
+      <tr><td>Рейтинг</td><td><span class="pill opt">По&nbsp;настройке</span></td><td>Звезда и&nbsp;оценка. Включается и&nbsp;выключается для&nbsp;конкретного размещения: низкий рейтинг играет против бренда. Самый низкий приоритет. Когда открыт счётчик, можно убрать.</td></tr>
       <tr><td>Корзина</td><td><span class="pill must">Обязательно</span></td><td>Иконка корзины, после нажатия счётчик количества.</td></tr>
     </tbody>
   </table></div>
@@ -210,11 +225,11 @@ ol.prio{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
   <h2>Что умеет карточка</h2>
   <ul>
     <li><b>Тап по&nbsp;карточке</b> открывает страницу товара.</li>
-    <li><b>Тап по&nbsp;корзине</b> кладёт 1&nbsp;шт и&nbsp;меняет кнопку на&nbsp;счётчик «− 1&nbsp;шт +».</li>
+    <li><b>Тап по&nbsp;корзине</b> кладёт 1&nbsp;шт и&nbsp;меняет кнопку на&nbsp;счётчик «− 1&nbsp;шт +». Старую цену и&nbsp;рейтинг при&nbsp;этом можно убрать.</li>
     <li><b>«+» и&nbsp;«−»</b> меняют количество в&nbsp;корзине. «−» на&nbsp;1&nbsp;шт убирает товар из&nbsp;корзины и&nbsp;возвращает иконку корзины.</li>
     <li><b>Связь с&nbsp;корзиной.</b> Если товар уже лежит в&nbsp;корзине, карточка сразу показывает счётчик с&nbsp;этим количеством. Так видно, что&nbsp;товар уже добавлен.</li>
     <li><b>Данные из&nbsp;каталога.</b> Вся информация о&nbsp;товаре подтягивается из&nbsp;каталога, рекламодатель её&nbsp;не&nbsp;правит.</li>
-    <li><b>Весовые товары.</b> Карточка умеет их&nbsp;показывать, вес в&nbsp;карточке указываем. Предложение, как&nbsp;выводить вес: писать его прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г», и&nbsp;не&nbsp;тратить на&nbsp;него отдельную строку. Или&nbsp;жертвовать одной строкой названия.</li>
+    <li><b>Весовые товары.</b> Карточка умеет их&nbsp;показывать, вес в&nbsp;карточке указываем. Предложение, как&nbsp;выводить вес: писать его прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г», и&nbsp;не&nbsp;тратить на&nbsp;него отдельную строку. Или&nbsp;жертвовать одной строкой названия. В&nbsp;счётчике вместо «шт» вес цифрами, под&nbsp;ним серым «г».</li>
   </ul>
 </section>
 
