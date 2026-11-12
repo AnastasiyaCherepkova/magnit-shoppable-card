@@ -56,6 +56,7 @@ td:first-child{font-weight:600;white-space:nowrap}
 /* схемы */
 .board{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px}
 .spec{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.spec h3 .pill,h2 .pill{vertical-align:middle;margin-left:6px}
 .spec .cap{font-size:14px;line-height:20px;color:var(--muted)}
 .stage{background:var(--creative);border-radius:12px;padding:40px 8px 8px;display:flex;gap:8px;overflow:hidden}
 .mini{flex:none;width:100%;max-height:64px;background:var(--card-dark);color:var(--on-dark);border-radius:20px;padding:8px;
@@ -109,7 +110,7 @@ a{color:var(--accent)}
   <p>Два вида карточки:</p>
   <ul>
     <li><b>Мини-карточка</b>: один товар поверх креатива.</li>
-    <li><b>Карточка-подборка</b>: ведёт сразу на&nbsp;несколько товаров.</li>
+    <li><b>Карточка-подборка</b>: ведёт сразу на&nbsp;несколько товаров. <span class="pill opt">Позже</span></li>
   </ul>
   <p><a href="https://www.figma.com/design/g5lzaItWB4XSqI1vN7cwzf/-2.0--%D0%9F%D0%BB%D0%B5%D0%B9%D1%81%D0%BC%D0%B5%D0%BD%D1%82%D1%8B?node-id=15853-88385">Рекламные места в&nbsp;Figma</a>: можно вставить карточку и&nbsp;проверить, как она встаёт.</p>
 </section>
@@ -126,16 +127,29 @@ a{color:var(--accent)}
   <div class="board">
 
     <div class="spec">
-      <h3>Полная мини-карточка</h3>
+      <h3>Мини-карточка</h3>
       <div class="stage"><div class="mini">
         <div class="ph"><i></i></div>
         <div class="txt">
           <div class="name">Солнцезащитный стик для&nbsp;лица SPF&nbsp;50</div>
-          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="badge num">−19%</span><span class="old num">1&nbsp;590&nbsp;₽</span><span class="rate"><b>★</b> 4,7</span></div>
+          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="old num">1&nbsp;590&nbsp;₽</span></div>
         </div>
         <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
       </div></div>
-      <p class="cap">Фото, название в&nbsp;2&nbsp;строки, цена, бейдж скидки, старая цена, рейтинг, корзина.</p>
+      <p class="cap">Фото, название в&nbsp;2&nbsp;строки, цена, старая цена, корзина.</p>
+    </div>
+
+    <div class="spec">
+      <h3>Без скидки</h3>
+      <div class="stage"><div class="mini">
+        <div class="ph c"><i></i></div>
+        <div class="txt">
+          <div class="name">Консилер для&nbsp;лица LAF, тон&nbsp;02</div>
+          <div class="row"><span class="price num">292&nbsp;₽</span></div>
+        </div>
+        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
+      </div></div>
+      <p class="cap">Старой цены нет, остаётся только цена.</p>
     </div>
 
     <div class="spec">
@@ -144,15 +158,15 @@ a{color:var(--accent)}
         <div class="ph"><i></i></div>
         <div class="txt">
           <div class="name">Солнцезащитный стик для&nbsp;лица SPF&nbsp;50</div>
-          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span><span class="badge num">−19%</span></div>
+          <div class="row"><span class="price num">1&nbsp;290&nbsp;₽</span></div>
         </div>
         <div class="step"><span>−</span><em class="num">1<small>шт</small></em><span>+</span></div>
       </div></div>
-      <p class="cap">Корзина превращается в&nbsp;счётчик. Старую цену и&nbsp;рейтинг при&nbsp;этом можно убрать.</p>
+      <p class="cap">Корзина превращается в&nbsp;счётчик. Старую цену при&nbsp;этом можно убрать.</p>
     </div>
 
     <div class="spec">
-      <h3>Весовой товар в&nbsp;корзине</h3>
+      <h3>Весовой товар</h3>
       <div class="stage"><div class="mini">
         <div class="ph d"><i></i></div>
         <div class="txt">
@@ -161,37 +175,11 @@ a{color:var(--accent)}
         </div>
         <div class="step"><span>−</span><em class="num">500<small>г</small></em><span>+</span></div>
       </div></div>
-      <p class="cap">Нужно учесть, как&nbsp;будут выглядеть весовые товары.</p>
+      <p class="cap">Граммовка в&nbsp;названии, отдельной строки нет.</p>
     </div>
 
     <div class="spec">
-      <h3>Рейтинг выключен</h3>
-      <div class="stage"><div class="mini">
-        <div class="ph c"><i></i></div>
-        <div class="txt">
-          <div class="name">Консилер для&nbsp;лица LAF, тон&nbsp;02</div>
-          <div class="row"><span class="price num">292&nbsp;₽</span><span class="badge num">−25%</span><span class="old num">389&nbsp;₽</span></div>
-        </div>
-        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
-      </div></div>
-      <p class="cap">Рейтинг опциональный: его могут включать и&nbsp;выключать.</p>
-    </div>
-
-    <div class="spec">
-      <h3>Мало места</h3>
-      <div class="stage"><div class="mini">
-        <div class="ph b"><i></i></div>
-        <div class="txt">
-          <div class="name">Виноград чёрный без&nbsp;косточек, 500&nbsp;г</div>
-          <div class="row"><span class="price num">83,93&nbsp;₽</span><span class="old num">97,99&nbsp;₽</span></div>
-        </div>
-        <div class="cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h16l-1.5 10h-13z"/><path d="M8 9l4-5 4 5"/><path d="M9 13v3M12 13v3M15 13v3"/></svg></div>
-      </div></div>
-      <p class="cap">Можно убрать рейтинг и&nbsp;бейдж. Старую цену лучше оставить.</p>
-    </div>
-
-    <div class="spec">
-      <h3>Карточка-подборка</h3>
+      <h3>Карточка-подборка <span class="pill opt">Позже</span></h3>
       <div class="stage"><div class="mini">
         <div class="stack"><div class="ph"><i></i></div><div class="ph b"><i></i></div><div class="ph c"><i></i></div><div class="plus num">+5</div></div>
         <div class="txt"></div>
@@ -211,38 +199,29 @@ a{color:var(--accent)}
       <tr><td>Фото товара</td><td><span class="pill must">Обязательно</span></td><td>Из&nbsp;карточки каталога.</td></tr>
       <tr><td>Название</td><td><span class="pill must">Обязательно</span></td><td>До&nbsp;2&nbsp;строк. Так хватает места объяснить, что&nbsp;за&nbsp;товар. Высоту фиксируем на&nbsp;2&nbsp;строки, чтобы не&nbsp;было скачков.</td></tr>
       <tr><td>Цена</td><td><span class="pill must">Обязательно</span></td><td>Подтягивается из&nbsp;каталога.</td></tr>
-      <tr><td>Старая цена</td><td><span class="pill cond">Если есть скидка</span></td><td>При&nbsp;скидке обязательна.</td></tr>
-      <tr><td>Бейдж скидки</td><td><span class="pill cond">Если есть скидка</span></td><td>«−19%». Считывается быстрее всего, но&nbsp;им&nbsp;можно пожертвовать, если не&nbsp;хватает места.</td></tr>
-      <tr><td>Вес</td><td><span class="pill cond">Для&nbsp;весовых товаров</span></td><td>Предусмотреть, как&nbsp;будут выглядеть весовые товары. Предложение: писать прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г». Или&nbsp;отдельной строкой за&nbsp;счёт одной строки названия.</td></tr>
-      <tr><td>Рейтинг</td><td><span class="pill opt">По&nbsp;настройке</span></td><td>Звезда и&nbsp;оценка. Включается и&nbsp;выключается для&nbsp;конкретного размещения: низкий рейтинг играет против бренда. Самый низкий приоритет. Когда открыт счётчик, можно убрать.</td></tr>
-      <tr><td>Корзина</td><td><span class="pill must">Обязательно</span></td><td>Иконка корзины, после нажатия счётчик количества.</td></tr>
+      <tr><td>Старая цена</td><td><span class="pill cond">Если есть скидка</span></td><td>Зачёркнутая. При&nbsp;скидке обязательна.</td></tr>
+      <tr><td>Вес</td><td><span class="pill cond">Для&nbsp;весовых товаров</span></td><td>Пишем в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г».</td></tr>
+      <tr><td>Корзина</td><td><span class="pill must">Обязательно</span></td><td>Иконка без&nbsp;подложки, после нажатия счётчик количества.</td></tr>
     </tbody>
   </table></div>
-
-  <div class="note">
-    <h3>Что убирать, когда не&nbsp;хватает места</h3>
-    <ol class="prio">
-      <li>Рейтинг.</li>
-      <li>Бейдж скидки. Скидку тогда показывает старая цена.</li>
-    </ol>
-  </div>
+  <p class="sub">Бейдж скидки и&nbsp;рейтинг в&nbsp;рекламной карточке не&nbsp;показываем.</p>
 </section>
 
 <section>
   <h2>Что умеет карточка</h2>
   <ul>
     <li><b>Тап по&nbsp;карточке</b> открывает страницу товара.</li>
-    <li><b>Тап по&nbsp;корзине</b> кладёт 1&nbsp;шт и&nbsp;меняет кнопку на&nbsp;счётчик «− 1&nbsp;шт +». Старую цену и&nbsp;рейтинг при&nbsp;этом можно убрать.</li>
+    <li><b>Тап по&nbsp;корзине</b> кладёт 1&nbsp;шт и&nbsp;меняет кнопку на&nbsp;счётчик «− 1&nbsp;шт +». Старую цену при&nbsp;этом можно убрать.</li>
     <li><b>«+» и&nbsp;«−»</b> меняют количество в&nbsp;корзине. «−» на&nbsp;1&nbsp;шт убирает товар из&nbsp;корзины и&nbsp;возвращает иконку корзины.</li>
     <li><b>Связь с&nbsp;корзиной.</b> Если товар уже лежит в&nbsp;корзине, карточка сразу показывает счётчик с&nbsp;этим количеством. Так видно, что&nbsp;товар уже добавлен.</li>
     <li><b>Данные из&nbsp;каталога.</b> Вся информация о&nbsp;товаре подтягивается из&nbsp;каталога, рекламодатель её&nbsp;не&nbsp;правит.</li>
-    <li><b>Весовые товары.</b> Карточка умеет их&nbsp;показывать, вес в&nbsp;карточке указываем. Предложение, как&nbsp;выводить вес: писать его прямо в&nbsp;названии, например «Креветки королевские Магнит, 500&nbsp;г», и&nbsp;не&nbsp;тратить на&nbsp;него отдельную строку. Или&nbsp;жертвовать одной строкой названия.</li>
+    <li><b>Весовые товары.</b> Граммовка в&nbsp;названии, отдельной строки под&nbsp;вес нет.</li>
   </ul>
 </section>
 
 <section>
-  <h2>Карточка-подборка</h2>
-  <p>Отдельный вариант, когда в&nbsp;рекламе много товаров. Ведёт не&nbsp;на&nbsp;один товар, а&nbsp;на&nbsp;всю подборку.</p>
+  <h2>Карточка-подборка <span class="pill opt">Позже</span></h2>
+  <p>Отдельный вариант, когда в&nbsp;рекламе много товаров. Ведёт не&nbsp;на&nbsp;один товар, а&nbsp;на&nbsp;всю подборку. Можно заложить в&nbsp;компонент сразу, делаем следующим этапом.</p>
   <ul>
     <li>Состав: несколько фото товаров, «+N» для&nbsp;остальных, текст «Все» и&nbsp;стрелка. Число в&nbsp;«+N» считается автоматически.</li>
     <li>Тап по&nbsp;всей карточке:
@@ -259,8 +238,7 @@ a{color:var(--accent)}
   <h2>Настройки в&nbsp;админке</h2>
   <p>Задаются для&nbsp;каждого размещения:</p>
   <ul>
-    <li>Режим: один товар или&nbsp;карточка-подборка.</li>
-    <li>Рейтинг: показывать или&nbsp;нет.</li>
+    <li>Режим: один товар или&nbsp;карточка-подборка (подборка позже).</li>
     <li>Куда ведёт подборка: шторка или&nbsp;раздел.</li>
   </ul>
 </section>
